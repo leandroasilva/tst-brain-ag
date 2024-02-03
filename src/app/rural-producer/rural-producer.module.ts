@@ -4,10 +4,15 @@ import { RuralProducerRepositoryModule } from 'src/infra/repositories/rural-prod
 
 import { RuralProducerController } from './rural-producer.controller';
 import { RuralProducerService } from './rural-producer.service';
+import { PlantedCropsRepositoryModule } from 'src/infra/repositories/planted-crops/planted-crops.module';
 
 @Module({
-  imports: [RuralProducerRepositoryModule, UtilsModule],
+  imports: [
+    RuralProducerRepositoryModule,
+    PlantedCropsRepositoryModule,
+    UtilsModule,
+  ],
   providers: [RuralProducerService],
-  controllers: [RuralProducerController]
+  controllers: [RuralProducerController],
 })
 export class RuralProducerModule {}

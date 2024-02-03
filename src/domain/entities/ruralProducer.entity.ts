@@ -29,6 +29,5 @@ export class RuralProducer extends BaseStructureEntity {
   @Column({ name: 'vegetation_area', nullable: true, type: 'decimal', precision: 5, scale: 2 })
   vegetationArea?: number;
   
-  @Column({ select: false, insert: false, update: false })
   plantedCrops?: PlantedCrops[];
 }

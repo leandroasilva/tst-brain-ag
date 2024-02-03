@@ -4,7 +4,7 @@ export class PlantedCrops1706954318755 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'rural_producers',
+        name: 'planted_crops',
         columns: [
           {
             name: 'id',
