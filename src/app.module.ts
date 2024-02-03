@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -8,6 +8,7 @@ import { DateModule } from './infra/providers/date/date.module';
 import { UtilsModule } from './infra/providers/utils/utils.module';
 import { PlantedCropsRepositoryModule } from './infra/repositories/planted-crops/planted-crops.module';
 import { RuralProducerRepositoryModule } from './infra/repositories/rural-producer/rural-producer.module';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 @Module({
   imports: [
@@ -28,4 +29,8 @@ import { RuralProducerRepositoryModule } from './infra/repositories/rural-produc
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) { 
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

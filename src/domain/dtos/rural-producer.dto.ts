@@ -1,7 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiQuery } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
-import { RuralProducer } from 'src/domain/entities/ruralProducer.entity';
 import { IsCnpjOrCpf } from 'src/infra/providers/decorators/validateCpfCnpj';
 
 export class RuralProducerDto {
@@ -73,16 +72,19 @@ export class QueryRuralProducerDto {
 }
 
 export class RequestQueryRuralProducerDto {
+  @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
   query?: string;
 
+  @ApiProperty({ type: Number, required: false, default: 0 })
   @IsNumber()
   @Transform(({ value }) => {
     return Number(value);
   })
   page: number;
 
+  @ApiProperty({ type: Number, required: false, default: 10 })
   @IsNumber()
   @Transform(({ value }) => {
     return Number(value);

@@ -7,12 +7,14 @@ import { json, urlencoded } from 'express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule, {
+    cors: true,
+  });
   const options = new DocumentBuilder()
     .setTitle('Documented API - Test Brain Ag ')
     .setDescription('Test API for back end developer vacancy at Brain AG')
     .setVersion('1.0')
-    .addServer('http://localhost:3000/', 'Local environment')
+    .addServer('http://localhost:4001/', 'Local environment')
     .addTag('Rural Producer API')
     .build();
 
