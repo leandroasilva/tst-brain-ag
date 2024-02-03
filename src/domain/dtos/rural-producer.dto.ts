@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, ValidateIf } from 'class-validator';
 import { RuralProducer } from 'src/domain/entities/ruralProducer.entity';
@@ -15,22 +16,27 @@ export class RuralProducerDto {
 }
 
 export class RequestRuralProducerDto {
+  @ApiProperty({ type: String, required: false })
   @IsNotEmpty()
   @IsString()
   name: string;
 
+  @ApiProperty({ type: String, required: false })
   @IsNotEmpty()
   @IsString()
   farm: string;
 
+  @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
   city?: string;
 
+  @ApiProperty({ type: String, required: false })
   @IsOptional()
   @IsString()
   state?: string;
 
+  @ApiProperty({ type: String, required: true })
   @IsNotEmpty()
   @IsString()
   @Transform(({ value }) => {
@@ -39,6 +45,7 @@ export class RequestRuralProducerDto {
   @IsCnpjOrCpf()
   document: string;
 
+  @ApiProperty({ type: Number, required: false, default: 0.0 })
   @IsOptional()
   @IsNumber()
   @ValidateIf(
@@ -48,10 +55,12 @@ export class RequestRuralProducerDto {
   )
   totalArea?: number = 0.0;
 
+  @ApiProperty({ type: Number, required: false, default: 0.0 })
   @IsOptional()
   @IsNumber()
   productiveArea?: number = 0.0;
 
+  @ApiProperty({ type: Number, required: false, default: 0.0 })
   @IsOptional()
   @IsNumber()
   vegetationArea?: number = 0.0;
